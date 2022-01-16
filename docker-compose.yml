@@ -1,0 +1,21 @@
+version: '3'
+services:
+  go:
+    build: 
+      dockerfile: build/docker/Dockerfile.go-dev
+      context: .
+    # During development we map local files into the container
+    volumes:
+      - .:/go/src/app
+    ports:
+      - "333:333"
+    tty: true
+  db:
+    image: mysql:8
+    ports:
+      - "33006:3306"
+    volumes:
+      - ./build/docker/db:/docker-entrypoint-initdb.d
+      - ./build/docker/db/data:/var/lib/mysql
+    env_file: 
+      - .env

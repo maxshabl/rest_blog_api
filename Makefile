@@ -16,6 +16,9 @@ bash:
 mg-up:
 	@goose -dir ./migrations ${GOOSE_DRIVER} ${GOOSE_DB_STRING} up
 
+mg-create:
+	@goose -dir ./migrations create ${name} sql
+
 mg-redo:
 	@goose -dir ./migrations $(GOOSE_DRIVER) ${GOOSE_DB_STRING} redo
 

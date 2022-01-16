@@ -7,7 +7,7 @@ CREATE TABLE `posts` (
  `abstract` text NOT NULL,
  `article` mediumtext NOT NULL,
  `keywords` varchar(511) NOT NULL DEFAULT '',
- `category` tinyint NOT NULL,
+ `category_id` tinyint NOT NULL,
  `slug` varchar(255) NOT NULL DEFAULT '',
  `allow_comments` tinyint(1) NOT NULL DEFAULT '1',
  `tags` varchar(511) NOT NULL DEFAULT '',

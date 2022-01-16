@@ -13,5 +13,5 @@ CREATE TABLE `comments` (
 
 -- +goose Down
 -- +goose StatementBegin
-DROP `comments`
+DROP TABLE `comments`
 -- +goose StatementEnd

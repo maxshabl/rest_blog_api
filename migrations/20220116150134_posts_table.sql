@@ -11,7 +11,7 @@ CREATE TABLE `posts` (
  `slug` varchar(255) NOT NULL DEFAULT '',
  `allow_comments` tinyint(1) NOT NULL DEFAULT '1',
  `tags` varchar(511) NOT NULL DEFAULT '',
- `photo` mediumtext NOT NULL,
+ `photo` varchar(255) NOT NULL,
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 -- +goose StatementEnd

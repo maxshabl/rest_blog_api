@@ -13,8 +13,6 @@ import (
 	//"github.com/joho/godotenv"
 )
 
-var TestVar int
-
 func init() {
 	err := godotenv.Load(".env")
 	if err != nil {

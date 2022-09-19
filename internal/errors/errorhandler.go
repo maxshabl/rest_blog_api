@@ -1,7 +1,6 @@
 package errors
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -26,9 +25,11 @@ func HandleError(w http.ResponseWriter, err error) {
 	//fmt.Fprintf(os.Stderr, "Stack trace: %+v\n", errors.WithStack(errors.Cause(err)))
 	fmt.Fprintf(os.Stderr, "Stack trace: %+v\n", err)
 	errorContext := GetContext(err)
-	if errorContext != nil && errorContext["message"] != "" {
+	if errorContext != nil {
 		fmt.Fprintf(os.Stderr, "Context %s", errorContext)
-		msg, _ := json.Marshal(errorContext)
-		w.Write(msg)
+		//msg, _ := json.Marshal(errorContext)
+		if errorContext["field"] == ContextField {
+			w.Write([]byte(errorContext["message"]))
+		}
 	}
 }

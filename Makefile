@@ -4,6 +4,7 @@ up:
 	docker-compose up -d
 down:
 	docker-compose down
+
 up-no-cache: down
 	docker-compose build --no-cache && \
 	docker-compose up -d

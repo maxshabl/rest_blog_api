@@ -13,3 +13,9 @@ type User struct {
 	CreatedAt          sql.NullString `db:"created_at"`
 	UpdatedAt          sql.NullString `db:"updated_at"`
 }
+
+type UserInterface interface {
+	FindUserByName(name string) (User, error)
+	IsLoginEmailExist(login string, email string) bool
+	AddUser(login string, passwordHash string, email string, status int, role int) (int64, error)
+}

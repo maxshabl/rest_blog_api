@@ -1,6 +1,6 @@
-package response
+package login
 
-type LoginResponse struct {
+type Response struct {
 	Login      string
 	Email      string
 	JWT        string

@@ -17,6 +17,10 @@ const (
 	NotFound
 )
 
+const (
+	ContextField string = "extMsg"
+)
+
 type customError struct {
 	errorType     ErrorType
 	originalError error

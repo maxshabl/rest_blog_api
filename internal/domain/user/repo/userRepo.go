@@ -3,6 +3,7 @@ package repo
 import (
 	"blog/internal/domain/user/entity"
 	"blog/internal/errors"
+
 	"github.com/jmoiron/sqlx"
 )
 
@@ -35,10 +36,8 @@ func (r Repo) IsLoginEmailExist(login string, email string) bool {
 	var userId int64
 
 	err := r.db.Get(&userId, "SELECT id userId FROM "+tableName+" WHERE login = ? or email = ?", login, email)
-	if err != nil {
-		return false
-	}
-	return true
+	
+	return err != nil
 }
 
 func (r Repo) AddUser(login string, passwordHash string, email string, status int, role int) (int64, error) {

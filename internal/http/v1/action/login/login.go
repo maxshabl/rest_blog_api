@@ -1,17 +1,13 @@
-package action
+package login
 
 import (
 	"blog/internal/domain/user/repo"
 	"blog/internal/domain/user/usecase/login"
 	"blog/internal/errors"
-	"blog/internal/http/v1/request"
-	"blog/internal/http/v1/response"
 	"blog/internal/store"
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
-	"os"
 )
 
 type Handler func(http.ResponseWriter, *http.Request)
@@ -30,13 +26,12 @@ func GetTokenByPassword(w http.ResponseWriter, r *http.Request) {
 	log.Println("Executing GetTokenByPassword")
 
 	decoder := json.NewDecoder(r.Body)
-	params := request.Login{}
+	params := Request{}
 	err := decoder.Decode(&params)
 
 	if err != nil {
-		errors.AddErrorContext(err, "", "wrong input params")
-		fmt.Fprintf(os.Stderr, "input format errors %s", err)
-		w.WriteHeader(http.StatusNotFound)
+		err := errors.AddErrorContext(err, errors.ContextField, "wrong input")
+		errors.HandleError(w, err)
 		return
 	}
 
@@ -47,7 +42,7 @@ func GetTokenByPassword(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result, _ := json.Marshal(response.LoginResponse{
+	result, _ := json.Marshal(Response{
 		Login:      user.Login,
 		Email:      user.Email,
 		JWT:        jwt,
@@ -55,8 +50,6 @@ func GetTokenByPassword(w http.ResponseWriter, r *http.Request) {
 	})
 
 	w.Write(result)
-	println("Params:", user.Login, user.PasswordHash)
-
 }
 
 //func GetTokenByRefresh() (w http.ResponseWriter, r *http.Request) {
